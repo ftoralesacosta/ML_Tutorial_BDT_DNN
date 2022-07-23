@@ -2,6 +2,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from math import sqrt
+from math import log
+
 def compare_train_test(
     y_pred_train, y_train, y_pred, y_test, high_low=(0,1), 
     bins=30,xlabel="", ylabel="Arbitrary units", title="", 
@@ -49,3 +52,13 @@ def compare_train_test(
     plt.ylabel(ylabel)
     plt.legend(loc='best')
 
+
+def amsasimov(s,b): # asimov (or Poisson) significance
+        if b<=0 or s<=0:
+            return 0
+        try:
+            return sqrt(2*((s+b)*log(1+float(s)/b)-s))
+        except ValueError:
+            print(1+float(s)/b)
+            print (2*((s+b)*log(1+float(s)/b)-s))
+        #return s/sqrt(s+b)
